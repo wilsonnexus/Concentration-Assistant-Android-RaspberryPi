@@ -10,7 +10,7 @@ GPIO.setup(LED_PIN,GPIO.OUT, initial=GPIO.LOW)   # Set pin function as output
 
 
 def on_connect(self, mosq, obj, rc):
-        self.subscribe("led", 0)
+        self.subscribe("sensor/temp", 0)
     
 def on_message(mosq, obj, msg):
     print(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
@@ -56,5 +56,5 @@ while True:
     if rc == 7:
         print("Connection lost, reconnecting...")
         mqttc.reconnect()
-        mqttc.subscribe("led", 0)
+        mqttc.subscribe("sensor/temp", 0)
         rc = 0
