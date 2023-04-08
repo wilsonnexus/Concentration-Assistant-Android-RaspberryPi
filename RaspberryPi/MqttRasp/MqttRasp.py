@@ -38,8 +38,8 @@ mqttc.on_publish = on_publish
 mqttc.on_subscribe = on_subscribe
 
 
-mqttc.username_pw_set("kvhcvoxa", "QFMnndfx0Odp")# "P4nf0uecWGOu"
-mqttc.connect("driver.cloudmqtt.com", 18799, 1000)
+mqttc.username_pw_set("kigpggpf", "kb55FEKZNTjA")# "P4nf0uecWGOu"
+mqttc.connect("driver.cloudmqtt.com", 18741, 60)
 # Set a stopping condition or just press ctrl+C to quit.
 """while(True):
     inp = input()
