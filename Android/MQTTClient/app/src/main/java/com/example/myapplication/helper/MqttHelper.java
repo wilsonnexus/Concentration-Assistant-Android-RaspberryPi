@@ -23,14 +23,14 @@ import info.mqtt.android.service.MqttAndroidClient;
 public class MqttHelper {
     public MqttAndroidClient mqttAndroidClient;
 
-    final String serverUri = "tcp://driver.cloudmqtt.com:18799";
+    final String serverUri = "tcp://driver.cloudmqtt.com:18741";
 
     final String clientId = "WilsonAndroidClient2";
     final String subscriptionTopic = "sensor/+"; // You need to type this into the Websocket
                                                 // topic and replace the + symbol or else
                                                 // you disconnect
-    final String username = "kvhcvoxa";
-    final String password = "QFMnndfx0Odp";
+    final String username = "kigpggpf";
+    final String password = "kb55FEKZNTjA";
 
 
 
