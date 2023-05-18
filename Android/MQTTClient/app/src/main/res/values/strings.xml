@@ -6,17 +6,24 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
+    <!-- Button Names -->
+    <!-- Fragment Button Names -->
+    <string name="pomodoro">Pomodoro Technique</string>
+    <string name="overdrive">Overdrive</string>
     <string name="next">Next</string>
+    <string name="back">Back</string>
     <string name="previous">Previous</string>
     <string name="block">BLock</string>
     <string name="unblock">UnbLock</string>
-    
+
+    <!-- MainActivity Button Names -->
     <string name="lock">Lock</string>
     <string name="enable">Enable</string>
-    <string name="disable">Disable</string>
+    <string name="disable">Start</string>
     <string name="durationSpinner">Select Time</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
+    <!-- Text -->
+    <string name="modes">Modes:</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 
