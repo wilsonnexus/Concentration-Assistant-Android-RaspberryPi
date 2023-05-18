@@ -1,14 +1,23 @@
 """
+Original Code by Ryan Lopez
+Updated deprecated libraries and Modified Code to suit my project needs by Wilson Neira
+
 Program Description:
 
 This program beeps when the users alpha waves have been in the relaxed state for too long, with potential appications
-to keep chiclden's attention.
+to keep a user's attention.
 """
 
 import os
 import sys
 sys.path.insert(1, os.path.dirname(os.getcwd())) #This allows importing files from parent folder
 import time
+from time import sleep
+import RPi.GPIO as GPIO
+import paho.mqtt.client as paho
+from urllib.parse import urlparse
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
@@ -25,7 +34,51 @@ from analysis_tools import get_power_spectrum, get_rms_voltage, get_brain_wave, 
 import pygame
 from pygame import mixer #modulo for playing audio
 mixer.init() 
-alert=mixer.Sound('rei.wav') #sets alert sound
+
+
+LED_PIN0=10  #define LED pin
+LED_PIN1=17
+LED_PIN2=27 
+GPIO.setup(LED_PIN0,GPIO.OUT, initial=GPIO.LOW)   # Set pin function as output
+GPIO.setup(LED_PIN1,GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(LED_PIN2,GPIO.OUT, initial=GPIO.LOW)
+
+def on_connect(self, mosq, obj, rc):
+        self.subscribe("sensor/temp", 0)
+    
+def on_message(mosq, obj, msg):
+    print(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
+    if(msg.payload.decode('utf8') == str(1)):    
+        print("LED on")      
+        GPIO.output(LED_PIN0,GPIO.HIGH)  #LED ON
+        GPIO.output(LED_PIN1,GPIO.HIGH)
+        GPIO.output(LED_PIN2,GPIO.HIGH)
+    elif(msg.payload.decode('utf8') == str(0)):    
+        print("LED off")
+        GPIO.output(LED_PIN0,GPIO.LOW)   # LED OFF
+        GPIO.output(LED_PIN1,GPIO.LOW)
+        GPIO.output(LED_PIN2,GPIO.LOW) 
+
+def on_publish(mosq, obj, mid):
+    print("mid: " + str(mid))
+
+    
+def on_subscribe(mosq, obj, mid, granted_qos):
+    print("Subscribed: " + str(mid) + " " + str(granted_qos))
+
+# Create an MQTT client and set up its callbacks
+mqttc = paho.Client("WilsonEEGClient", clean_session=False)
+# Assign event callbacks
+mqttc.on_message = on_message                          # called as callback
+mqttc.on_connect = on_connect
+mqttc.on_publish = on_publish
+mqttc.on_subscribe = on_subscribe
+
+
+mqttc.username_pw_set("kigpggpf", "kb55FEKZNTjA")# "P4nf0uecWGOu"
+mqttc.connect("driver.cloudmqtt.com", 18741, 60)
+mqttc.loop_start()
+
 
 def update_timeseries(time_series, volt_diff):
     """
@@ -47,7 +100,7 @@ VRANGE = 2/3 #Full range scale in mV. Options: 256, 512, 1024, 2048, 4096, 6144.
 sps = 128 # Samples per second to collect data. Options: 128, 250, 490, 920, 1600, 2400, 3300.
 sinterval = 1.0/sps
 sampletime = 3 # how long to look back in time for current alpha waves
-adc = ADS.ADS1015(i2c = i2c, gain = VRANGE, data_rate = sps, mode = Mode.CONTINUOUS)
+adc = ADS.ADS1015(i2c = i2c, gain = VRANGE, data_rate = sps, mode = Mode.SINGLE)
 pygame.init()
 clock = pygame.time.Clock() #clock is used to collect data and update graph on regular interval.
 
@@ -120,6 +173,8 @@ chan_diff = AnalogIn(adc, ADS.P2, ADS.P3)
 t0 = time.perf_counter()
 for i in range(nsamples):
     st = time.perf_counter()
+    #attempted to fix error after 1 minute
+    #time.sleep(0.005)
     volt_diff = chan_diff.voltage-3.3
     print("volt_diff")
     print(volt_diff)
@@ -134,9 +189,10 @@ for i in range(nsamples):
         last_concentrate_dist +=1
     else: #user just concentrated
         last_concentrate_dist = 0
+        mqttc.publish("sensor/temp", payload=0, qos=0, retain=False)
     if last_concentrate_dist > max_rest*sps:
-        alert.play() #user has been resting too long, alert them
-     
+        #user has been resting too long, alert them
+        mqttc.publish("sensor/temp", payload=1, qos=0, retain=False)
     #Plotting real time stuff
     times.append(i*sinterval) #adds current time
     rms_values.append(rms) #adds rms
