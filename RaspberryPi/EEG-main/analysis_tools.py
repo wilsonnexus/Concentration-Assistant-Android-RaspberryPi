@@ -143,3 +143,4 @@ def get_cutoff(num_samples, calibration_time, sps, adc, ADS):
     cutoff, _, __ = gaussian_eval(relaxed_rms, concentrated_rms) #only care about cutoff
     return cutoff
     
+
