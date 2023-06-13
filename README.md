@@ -8,3 +8,9 @@ https://github.com/wilsonnexus/Concentration-Assistant-Android-RaspberryPi/asset
 
 
 
+
+https://github.com/wilsonnexus/Concentration-Assistant-Android-RaspberryPi/assets/96637419/95f3bf90-a907-4a30-80f3-4981b158bcac
+
+
+
+
