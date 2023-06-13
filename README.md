@@ -4,11 +4,13 @@ The ability to concentrate on a task is crucial for productivity and success, ye
 
 
 Android App Video Demonstration
+
 https://github.com/wilsonnexus/Concentration-Assistant-Android-RaspberryPi/assets/96637419/5e3b3ed0-58c7-4394-ae75-99553a734aad
 
 
 
 EEG Raspberry Pi Video Demonstration
+
 https://github.com/wilsonnexus/Concentration-Assistant-Android-RaspberryPi/assets/96637419/95f3bf90-a907-4a30-80f3-4981b158bcac
 
 
