@@ -16,6 +16,7 @@ Main Activities:
 * MainActivity.java - Sets up the UI and contains callback methods for button clicks.
 * FirstFragment.java - Manages the settings UI and mode selection.
 * Overrides.java - Overrides for controlling back button behavior.
+  
 Key Functions:
 
 * startOverdriveTimer() - Enables focus mode with no breaks.
@@ -65,6 +66,7 @@ The ability to concentrate on a task is crucial for productivity and success, ye
 * Study long-term impacts on productivity, cognitive abilities, etc.
 * Expand features of app for scheduling, productivity tracking, etc.
 * Detect whether concentration is on productive tasks vs distractions.
+
 Credits
 
 By Wilson Neira
