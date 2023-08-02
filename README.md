@@ -1,6 +1,5 @@
 # Concentration Assistant Using Android And RaspberryPi
 This project involves the development of a concentration-enhancing device prototype consisting of an Android app, Raspberry Pi, and EEG sensor.
-
 ## Overview
 The goal is to build a system that can help users stay focused on tasks by alerting them when concentration lapses. The core components are:
 
@@ -55,8 +54,6 @@ To use the full system:
 6. EEG data is monitored to detect lapses in concentration and trigger vibration motor.
 Refer to the full thesis paper for additional details on the implementation, experimentation, and results. Comments in the code also provide insights.
 
-## Abstract  
-The ability to concentrate on a task is crucial for productivity and success, yet it is a common struggle for many individuals. During my honors thesis, I aim to investigate the question "How can technology assist with concentration?" by exploring the potential of existing computer systems, such as smartphones and Raspberry Pis, to improve concentration and enhance weaker functioning related to concentration. As we increasingly rely on technology to augment our human capabilities, I believe that technology can play a significant role in supporting concentration. To this end, I proposed the development of a shoulder pad that transmits vibrations to a person when they have stopped focusing on a task, and a smartphone application that blocks distracting notifications and alerts the user when they want to take a break. In addition to these devices, I plan to measure concentration levels using EEG data collected through a DIY EEG sensor built with various materials. By working with these devices, I hope to gain insights into the underlying factors that contribute to reduced concentration levels and identify potential strategies for improving concentration. Ultimately, my thesis seeks to explore whether the development of such technology can aid the brain in concentrating on a task, and if not, what alternative approaches can be taken to support concentration. By shedding light on the complex nature of concentration and the potential for technology to assist in this area, I hope to contribute to the growing body of research on how technology can improve our cognitive abilities and enhance our overall well-being.
 ## Future Work
 * Improve EEG signal quality and motion artifacts filtering.
 * Add more sensors for additional biometric data.
