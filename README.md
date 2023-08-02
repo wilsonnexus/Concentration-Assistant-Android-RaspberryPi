@@ -46,7 +46,7 @@ To use the full system:
 6. EEG data is monitored to detect lapses in concentration and trigger vibration motor.
 Refer to the full thesis paper for additional details on the implementation, experimentation, and results. Comments in the code also provide insights.
 
-Future Work
+## Future Work
 * Improve EEG signal quality and motion artifacts filtering.
 * Add more sensors for additional biometric data.
 * Incorporate machine learning to customize experience per user.
