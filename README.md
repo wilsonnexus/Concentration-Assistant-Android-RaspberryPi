@@ -66,6 +66,7 @@ The ability to concentrate on a task is crucial for productivity and success, ye
 * Expand features of app for scheduling, productivity tracking, etc.
 * Detect whether concentration is on productive tasks vs distractions.
 Credits
+
 By Wilson Neira
 
 Original EEG code by Ryan Lopez
