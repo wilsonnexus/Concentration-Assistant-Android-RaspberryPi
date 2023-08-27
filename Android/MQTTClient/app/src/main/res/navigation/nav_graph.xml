@@ -3,26 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.myapplication.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
+        android:id="@+id/mainFragment"
+        android:name="com.example.myapplication.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main" />
 
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/secondFragment"
         android:name="com.example.myapplication.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:label="SecondFragment"
+        tools:layout="@layout/fragment_second" />
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.example.myapplication.ThirdFragment"
+        android:label="ThirdFragment"
+        tools:layout="@layout/fragment_third" />
+
+    <action
+        android:id="@+id/action_mainFragment_to_secondFragment"
+        app:destination="@id/secondFragment" />
+
+    <action
+        android:id="@+id/action_secondFragment_to_mainFragment"
+        app:destination="@id/mainFragment" />
+
+    <action
+        android:id="@+id/action_secondFragment_to_thirdFragment"
+        app:destination="@id/thirdFragment" />
+
+    <action
+        android:id="@+id/action_thirdFragment_to_secondFragment"
+        app:destination="@id/secondFragment" />
+
 </navigation>
