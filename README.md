@@ -12,9 +12,10 @@ The app allows users to select a timer duration and enables a "focus mode" which
 
 Main Activities:
 
-* MainActivity.java - Sets up the UI and contains callback methods for button clicks.
-* FirstFragment.java - Manages the settings UI and mode selection.
-* Overrides.java - Overrides for controlling back button behavior.
+* MainActivity.java - Overrides certain functions. 
+* MainFragment.java - Sets up the UI and contains callback methods for button clicks.
+* SecondFragment.java - Manages the settings UI and mode selection.
+* ThirdFragment.java - About section.
   
 Key Functions:
 
