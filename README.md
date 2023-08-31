@@ -1,4 +1,4 @@
-# Concentration Assistant Using Android And RaspberryPi
+# Concentration Assistant Using Android And Raspberry Pi
 This project involves the development of a concentration-enhancing device prototype consisting of an Android app, Raspberry Pi, and EEG sensor.
 ## Overview
 The goal is to build a system that can help users stay focused on tasks by alerting them when concentration lapses. The core components are:
