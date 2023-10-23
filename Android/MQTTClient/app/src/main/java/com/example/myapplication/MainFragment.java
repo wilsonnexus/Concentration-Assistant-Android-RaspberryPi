@@ -80,7 +80,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         durationSpinner = view.findViewById(R.id.durationSpinner);
         // Get the Vibrator service
         vibrator = (Vibrator) requireContext().getSystemService(Context.VIBRATOR_SERVICE);
-        // Replace the ArrayAdapter initialization code with the new code
+        // Convert values to hours and minutes
         String[] durations = getResources().getStringArray(R.array.durations_array);
         List<String> durationsList = new ArrayList<>();
         for (String duration : durations) {
@@ -88,7 +88,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             if (durationValue == 1) {
                 durationsList.add(duration + " minute");
             }
-            else {
+            else if (durationValue >= 60) {
+                durationsList.add((durationValue / 60) +
+                        ((durationValue < 120) ? " hour " : " hours ") +
+                        (((durationValue % 60) <= 1) ? "" : (durationValue - 60) + " minutes"));
+            } else {
                 durationsList.add(duration + " minutes");
             }
         }
@@ -104,9 +108,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         //durationSpinner = view.findViewById(R.id.durationSpinner);
 
         dataReceived = (TextView) view.findViewById(R.id.textview_second);
-
-
-        // Code Copied
 
         Button nextButton = view.findViewById(R.id.settings_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +135,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    // Code Copied
     public void disableBackButton() {
         backButtonEnabled = false;
     }
