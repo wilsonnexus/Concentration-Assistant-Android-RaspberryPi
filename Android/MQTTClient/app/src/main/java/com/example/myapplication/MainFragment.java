@@ -21,7 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.helper.MqttHelper;
@@ -33,35 +32,34 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class MainFragment extends Fragment implements View.OnClickListener {
-
-    private Button lock, disable, enable;
-    private static final int RESULT_ENABLE = 11;
+    private Button disable;
     private DevicePolicyManager devicePolicyManager;
     private ActivityManager activityManager;
     private ComponentName componentName;
-    //public static boolean settingsClicked = false; // Declare boolean variable here
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
     MqttHelper mqttHelper;
-
     TextView dataReceived;
-    private Button btnPublish;
     private boolean overdrive = true;
-
-
+    private boolean mIsLocked = false;
     // Allowlist one app
     private static final String KIOSK_PACKAGE = "com.example.myapplication";
-    private static final String[] APP_PACKAGES = {KIOSK_PACKAGE};
-    private boolean backButtonEnabled = true;
-
-    private boolean mIsLocked = false;
+    // private static final String[] APP_PACKAGES = {KIOSK_PACKAGE};
     private CountDownTimer timer;
     private Spinner durationSpinner;
     private TextView remainingTimeTextView;
-
     private Vibrator vibrator;
+
+    public MainFragment() {
+        // Default constructor with no dependencies
+    }
+
+    // Constructors for dependencies
+    public MainFragment(DevicePolicyManager devicePolicyManager, MqttHelper mqttHelper, Vibrator vibrator) {
+        this.devicePolicyManager = devicePolicyManager;
+        this.mqttHelper = mqttHelper;
+        this.vibrator = vibrator;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -99,13 +97,14 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(),
                 R.layout.custom_spinner_item, durationsList);
 
-
         adapter.setDropDownViewResource(R.layout.custom_spinner_item);
         durationSpinner.setAdapter(adapter);
+        Log.d("debugger",durationSpinner.getSelectedItem().toString());
+        // Set test selection
+        //durationSpinner.setSelection(1);
 
         disable.setOnClickListener(this);
         remainingTimeTextView = view.findViewById(R.id.textView);
-        //durationSpinner = view.findViewById(R.id.durationSpinner);
 
         dataReceived = (TextView) view.findViewById(R.id.textview_second);
 
@@ -125,7 +124,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         if (view == disable) {
             if (!overdrive) {
                 pomodoroTechnique();
-                //overdriveImplementation();
             }
             else {
                 overdriveImplementation();
@@ -135,21 +133,19 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public void disableBackButton() {
-        backButtonEnabled = false;
-    }
-
-    public void enableBackButton() {
-        backButtonEnabled = true;
-    }
-
     public Spinner getDurationSpinner() {
         return durationSpinner;
     }
 
+    public Button getDisableButton() {
+        return disable;
+    }
+
+    public Vibrator getVibrator() {
+        return vibrator;
+    }
 
     public void overdriveImplementation() {
-        //MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.mainFragment);
         if (!mIsLocked) {
             // First click
             int delayDuration = Integer.parseInt(durationSpinner.getSelectedItem().toString().replaceAll("[^\\d.]", "")) * 60000;
@@ -189,7 +185,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             timer.start(); // Start the new timer
         } else {
 
-
             // Second click
             disable.setText("Disable");
             timer.cancel();
@@ -214,7 +209,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     }
 
     public void pomodoroTechnique() {
-        //MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.mainFragment);
         if (!mIsLocked) {
             // First click
             int workDuration = Integer.parseInt(durationSpinner.getSelectedItem().toString().replaceAll("[^\\d.]", "")) * 60000;
@@ -292,7 +286,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public DevicePolicyManager getDevicePolicyManager() {
         return devicePolicyManager;
     }
-
 
 
     // Start MQTT Client Code
