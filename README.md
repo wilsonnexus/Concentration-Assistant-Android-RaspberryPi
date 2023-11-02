@@ -69,4 +69,3 @@ By Wilson Neira
 
 Original EEG code by Ryan Lopez
 
-Thesis project for Honors College at UMass Amherst
