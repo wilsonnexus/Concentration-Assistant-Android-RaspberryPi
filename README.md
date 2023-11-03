@@ -22,10 +22,7 @@ Key Functions:
 * startOverdriveTimer() - Enables focus mode with no breaks.
 * startPomodoroTimer() - Uses Pomodoro technique of timed intervals with breaks.
 * lockApp() - Starts lock task mode to block app switching and notifications.
-## Android App Video Demonstration
-
-https://github.com/wilsonnexus/Concentration-Assistant-Android-RaspberryPi/assets/96637419/5e3b3ed0-58c7-4394-ae75-99553a734aad 
-
+  
 ## Raspberry Pi
 The Raspberry Pi processes the EEG data and controls the vibration motor over MQTT.
 
@@ -40,10 +37,7 @@ The EEG sensor hardware uses an ADC chip along with various op-amps, resistors, 
 * Circuit diagram and construction guide available in the thesis paper.
 * Outputs analog voltage signals corresponding to alpha brain waves.
 * Raspberry Pi uses ADC chip (ADS1015) to interface with the EEG circuit.
-## EEG Raspberry Pi Video Demonstration
-
-https://github.com/wilsonnexus/Concentration-Assistant-Android-RaspberryPi/assets/96637419/95f3bf90-a907-4a30-80f3-4981b158bcac
-
+  
 ## Usage
 To use the full system:
 
