@@ -39,7 +39,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private ComponentName componentName;
     MqttHelper mqttHelper;
     TextView dataReceived;
-    private boolean overdrive = true;
     private boolean mIsLocked = false;
     // Allowlist one app
     private static final String KIOSK_PACKAGE = "com.example.myapplication";
@@ -122,7 +121,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == disable) {
-            if (!overdrive) {
+            if (!((MainActivity) requireActivity()).getOverdrive()) {
                 pomodoroTechnique();
             }
             else {
@@ -151,18 +150,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             int delayDuration = Integer.parseInt(durationSpinner.getSelectedItem().toString().replaceAll("[^\\d.]", "")) * 60000;
 
             // Update a TextView to show the time remaining
-            // (optional)
             // Execute first action when timer is done
-            disable.setText("Cancel");
-            boolean active = devicePolicyManager.isAdminActive(componentName);
-            if (true) {
-                //devicePolicyManager.lockNow();
-                //disableBackButton();
-                ((MainActivity) requireActivity()).startLock();
-                //startLockTask();
-                mIsLocked = true;
-
-            }
+            lockApp();
 
             // Create a new timer for 5 seconds (adjust as desired)
             timer = new CountDownTimer(delayDuration, 1000) {
@@ -170,7 +159,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                     // Update a TextView to show the time remaining
                     // (optional)
                     long remainingTime = millisUntilFinished / 1000;
-                    remainingTimeTextView.setText("Time Left: " + remainingTime);
+                    remainingTimeTextView.setText("Time Left: " + timeToString(remainingTime));
                 }
 
                 public void onFinish() {
@@ -216,34 +205,48 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
             // Lock the app (blocking)
             lockApp();
+            if (workDuration / 60000 <= 5) {
+                // Create a new timer for 5 seconds (adjust as desired)
+                timer = new CountDownTimer(workDuration, 1000) {
+                    public void onTick(long millisUntilFinished) {
+                        // Update a TextView to show the time remaining
+                        // (optional)
+                        long remainingTime = millisUntilFinished / 1000;
+                        remainingTimeTextView.setText("Time Left: " + timeToString(remainingTime));
+                    }
 
-            // Create a new timer for the work period
-            timer = new CountDownTimer(workDuration, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    long remainingTime = millisUntilFinished / 1000;
-                    remainingTimeTextView.setText("Work Time Left: " + remainingTime);
-                }
-
-                public void onFinish() {
-                    // Unlock the app (unblocking)
-                    unlockApp();
-
-                    // Create a new timer for the break period
-                    timer = new CountDownTimer(breakDuration, 1000) {
-                        public void onTick(long millisUntilFinished) {
-                            long remainingTime = millisUntilFinished / 1000;
-                            remainingTimeTextView.setText("Break Time Left: " + remainingTime);
+                    public void onFinish() {
+                        // Execute second action when timer is done
+                        disable.setText("Disable");
+                        ((MainActivity) requireActivity()).stopLock();
+                        //stopLockTask();
+                        mIsLocked = false;
+                        remainingTimeTextView.setText("");
+                    }
+                };
+            } else {
+                // Create a new timer for the work period
+                timer = new CountDownTimer(workDuration, 1000) {
+                    public void onTick(long millisUntilFinished) {
+                        long remainingTime = millisUntilFinished / 1000;
+                        remainingTimeTextView.setText("Time Left: " + timeToString(remainingTime));
+                        if(remainingTime / 60 % 5 == 0 && mIsLocked && remainingTime != 0) {
+                            unlockApp();
                         }
-
-                        public void onFinish() {
-                            // Re-lock the app (blocking) and restart the work timer
+                        else if(remainingTime / 60 % 5 == 0 && !mIsLocked && remainingTime != 0) {
                             lockApp();
-                            timer.start();
                         }
-                    };
-                    timer.start(); // Start the break timer
-                }
-            };
+                    }
+                    public void onFinish() {
+                        // Execute second action when timer is done
+                        disable.setText("Disable");
+                        ((MainActivity) requireActivity()).stopLock();
+                        //stopLockTask();
+                        mIsLocked = false;
+                        remainingTimeTextView.setText("");
+                    }
+                };
+            }
             timer.start(); // Start the work timer
         } else {
             // Second click
@@ -253,6 +256,27 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private String timeToString(long seconds) {
+        long hours = seconds / 3600;
+        long minutes = (seconds % 3600) / 60;
+        long remainingSeconds = seconds % 60;
+
+        String timeResult = "";
+
+        if (hours > 0) {
+            timeResult += hours + ((hours == 1) ? " hour " : " hours ");
+        }
+
+        if (minutes > 0) {
+            timeResult += minutes + ((minutes == 1) ? " minute " : " minutes ");
+        }
+
+        if (remainingSeconds > 0) {
+            timeResult += remainingSeconds + ((remainingSeconds == 1) ? " second" : " seconds");
+        }
+
+        return timeResult.trim();
+    }
     private void lockApp() {
         disable.setText("Cancel");
         boolean active = devicePolicyManager.isAdminActive(componentName);
@@ -286,6 +310,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public DevicePolicyManager getDevicePolicyManager() {
         return devicePolicyManager;
     }
+
+
 
 
     // Start MQTT Client Code

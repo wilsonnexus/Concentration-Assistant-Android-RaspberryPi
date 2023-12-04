@@ -24,8 +24,24 @@ public class SecondFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        Button pomodoroButton = view.findViewById(R.id.pomodoro_button);
+        Button overdriveButton = view.findViewById(R.id.overdrive_button);
         Button backButton = view.findViewById(R.id.back_button);
+        Button buttonSecond = view.findViewById(R.id.button_second);
+        pomodoroButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) requireActivity()).startPomodoroTimer();
+            }
+        });
+
+        overdriveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) requireActivity()).startOverdriveTimer();
+            }
+        });
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,7 +51,7 @@ public class SecondFragment extends Fragment {
                 navController.navigate(R.id.action_secondFragment_to_mainFragment);
             }
         });
-        Button buttonSecond = view.findViewById(R.id.button_second);
+
         buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
