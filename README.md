@@ -62,4 +62,5 @@ Refer to the full thesis paper for additional details on the implementation, exp
 By Wilson Neira
 
 Original EEG code by Ryan Lopez
+https://github.com/ryanlopezzzz/EEG
 
