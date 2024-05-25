@@ -61,16 +61,6 @@ public class MainActivity extends AppCompatActivity {
         currentFragment = CurrentFragment.HOME;
     }
 
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        boolean isActive = devicePolicyManager.isAdminActive(componentName);
-    }
-
-
-
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -85,9 +75,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
-
-
+    
 
     public void startLock() {
         startLockTask();

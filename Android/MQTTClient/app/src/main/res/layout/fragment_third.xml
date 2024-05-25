@@ -7,10 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ThirdFragment">
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_third"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp">
@@ -90,15 +92,29 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal">
-                <Button
-                    android:id="@+id/button_third"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/back"
-                    android:onClick="onPreviousButtonClick" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    <Button
+        android:id="@+id/button_third"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/back"
+        android:textSize="20sp"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/black"
+        android:layout_margin="8dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintHeight_default="spread"
+        app:layout_constraintDimensionRatio="0.8:0.15"
+        android:onClick="onPreviousButtonClick" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"

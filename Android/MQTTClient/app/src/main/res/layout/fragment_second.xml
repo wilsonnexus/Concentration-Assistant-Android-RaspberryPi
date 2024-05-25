@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/textview_second"
@@ -11,58 +12,109 @@
         android:layout_height="wrap_content"
         android:text="@string/modes"
         android:textSize="34sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/pomodoro_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
 
     <Button
         android:id="@+id/pomodoro_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="@string/pomodoro"
+        android:textSize="20sp"
         android:backgroundTint="@color/blue"
-        android:textColor="#616161"
+        android:textColor="@color/black"
+        android:layout_margin="8dp"
+        android:padding="16dp"
+
         app:layout_constraintBottom_toTopOf="@+id/overdrive_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_second"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintHeight_default="spread"
+        app:layout_constraintDimensionRatio="0.8:0.15" />
 
     <Button
         android:id="@+id/overdrive_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/overdrive"
+        android:textSize="20sp"
+        android:backgroundTint="@color/blue"
+        android:textColor="@color/black"
+        android:layout_margin="8dp"
+        android:padding="16dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/text_separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pomodoro_button"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintHeight_default="spread"
+        app:layout_constraintDimensionRatio="0.8:0.15" />
+
+    <TextView
+        android:id="@+id/text_separator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/overdrive"
-        android:backgroundTint="@color/blue"
+        android:text="Options:"
+        android:textSize="34sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/button_second"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pomodoro_button" />
+        app:layout_constraintTop_toBottomOf="@+id/overdrive_button"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
 
     <Button
         android:id="@+id/button_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="@string/about"
+        android:textSize="20sp"
+        android:backgroundTint="@color/gray"
+        android:textColor="@color/black"
+        android:layout_margin="8dp"
+        android:padding="16dp"
+
         app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/overdrive_button" />
+        app:layout_constraintTop_toBottomOf="@+id/text_separator"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintHeight_default="spread"
+        app:layout_constraintDimensionRatio="0.8:0.15" />
+
     <Button
         android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="@string/back"
+        android:textSize="20sp"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/black"
+        android:layout_margin="8dp"
+        android:padding="16dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.939"/>
-
+        app:layout_constraintVertical_bias="0.939"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintHeight_default="spread"
+        app:layout_constraintDimensionRatio="0.8:0.15"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,14 +42,13 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private boolean mIsLocked = false;
     // Allowlist one app
     private static final String KIOSK_PACKAGE = "com.example.myapplication";
-    // private static final String[] APP_PACKAGES = {KIOSK_PACKAGE};
     private CountDownTimer timer;
     private Spinner durationSpinner;
     private TextView remainingTimeTextView;
     private Vibrator vibrator;
 
+    // Default constructor with no dependencies
     public MainFragment() {
-        // Default constructor with no dependencies
     }
 
     // Constructors for dependencies

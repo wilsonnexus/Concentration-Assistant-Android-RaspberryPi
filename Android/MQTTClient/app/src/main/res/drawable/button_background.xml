@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/button_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/blue" />
+    <corners android:radius="8dp" />
+    <padding android:left="16dp" android:top="16dp" android:right="16dp" android:bottom="16dp" />
+    <elevation android:elevation="4dp" />
+</shape>
